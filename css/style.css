@@ -1,0 +1,75 @@
+
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0px;
+    list-style: none;
+}
+
+.sidebar-nav {
+	width: 100%;
+	background-color: black;	
+}
+.sidebar-nav li {
+    display: inline;
+	margin-right: 10px;
+	margin-left: 10px; 	
+	text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+
+
+table {
+	margin:0px;padding:10px;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #4c1919;
+	-moz-border-radius-bottomleft:19px;
+	-webkit-border-bottom-left-radius:19px;
+	border-bottom-left-radius:19px;
+	
+	-moz-border-radius-bottomright:19px;
+	-webkit-border-bottom-right-radius:19px;
+	border-bottom-right-radius:19px;
+	
+	-moz-border-radius-topright:19px;
+	-webkit-border-top-right-radius:19px;
+	border-top-right-radius:19px;
+	
+	-moz-border-radius-topleft:19px;
+	-webkit-border-top-left-radius:19px;
+	border-top-left-radius:19px;
+}
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #FFF}
+th: {
+	background: #FF0000;
+	font-weight: 900;
+}
+
+#steranko {
+	font-weight: 900;
+	
+}
