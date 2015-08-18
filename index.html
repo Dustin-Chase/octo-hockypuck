@@ -37,6 +37,9 @@
         <body onload="javascript:search();">
                     <h1>Steranko-A-Day</h1>
                     <p>This page will display a cool Steranko comic each day. Come back each day to get your Steranko fix!</p>
+						<div id="loading > 
+						<img src="images/loading.gif">
+						</div>
 						<div id="comic-data">
 						</div>
 							<form id="search">
@@ -45,16 +48,16 @@
 						</div>
 						
 						<footer class="footer">
-						<p>
-						</p>
-						<p></p>
+						<p id="attr-footer"></p>
+						<br>
 						</footer>
 
     </div>
   
 	<!-- Functions that interact with the API -->
 	<script src="js/ster_search.js"></script>
-
+	<!-- jquery functions (loading gif) -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js">
 	</body>
 
 </html>

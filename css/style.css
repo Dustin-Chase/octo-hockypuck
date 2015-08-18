@@ -4,7 +4,6 @@
 
 .sidebar-nav {
     top: 0;
-    width: 250px;
     margin: 0;
     padding: 0px;
     list-style: none;
@@ -40,7 +39,7 @@
 }
 
 
-
+/*table styles*/
 table {
 	margin:0px;padding:10px;
 	box-shadow: 10px 10px 5px #888888;
@@ -72,4 +71,25 @@ th: {
 #steranko {
 	font-weight: 900;
 	
+}
+
+/*footer styles*/
+
+.footer {
+	width: 100%;
+	height: 50px; 
+	background-color: red;	
+	text-align: right;
+	line-height: 50px; 
+}
+
+.footer a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.footer a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
 }

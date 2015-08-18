@@ -32,7 +32,7 @@ function createHttpRequestObject() {
 function search() {
 	event.preventDefault();
 	var search_results;
-	my_key = "hidden";
+	my_key = "ccb6288e75d288d68ca50a4dbd86dc17";
 	//search by comic:creator, filter by comics only
 	var URL = "http://gateway.marvel.com:80/v1/public/creators/61/comics?format=comic&formatType=comic&limit=100&apikey=" + my_key;
 	var httpRequest = createHttpRequestObject(); 
@@ -80,9 +80,12 @@ function display(results) {
 			}
 			output += results.data.results[index].creators.items[i].role + "</td>" + "</tr>";
 		}			
-		output += "<tr>" + "<td>" + results.attributionHTML + "</td>" + "</tr>";
 		output += "</table>"
 	data_div.innerHTML = output; 
+	
+	var attribution_div = document.getElementById("attr-footer");
+	output = results.attributionHTML;
+	attribution_div.innerHTML = output; 
 }
 
 
@@ -91,3 +94,13 @@ function randomIntFromInterval(min, max)
 {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
+
+$('#loading')
+    .hide()  // Hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    })
+;
