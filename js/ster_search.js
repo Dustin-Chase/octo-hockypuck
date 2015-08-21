@@ -10,7 +10,7 @@ Description: Marvel API. Searches Marvel database for comics where Jim Steranko 
 
 */
 
-
+var my_key = "secret_key";
 /*Create a new HttpRequestObject
 @ param: none
 @ return: an HttpRequestObject on success, undefined variable on failure
@@ -29,12 +29,16 @@ function createHttpRequestObject() {
 @ return: an HttpRequestObject on success, undefined variable on failure
 @ Description: Search for creator ID
 */
-function search() {
+function search(URL) {
 	event.preventDefault();
 	var search_results;
-	my_key = "secret_key";
+	var rand_creator = randomIntFromInterval(0, 1499);
+	
 	//search by comic:creator, filter by comics only
-	var URL = "http://gateway.marvel.com:80/v1/public/creators/61/comics?format=comic&formatType=comic&limit=100&apikey=" + my_key;
+	if (URL === undefined) {
+		URL = "http://gateway.marvel.com:80/v1/public/creators/" + rand_creator + "/comics?format=comic&formatType=comic&limit=100&apikey=" + my_key;
+	}
+	
 	var httpRequest = createHttpRequestObject(); 
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState != 4) {
@@ -44,7 +48,7 @@ function search() {
 			search_results  = JSON.parse(httpRequest.responseText);
 			console.log("The search results by creator are:");
 			console.log(JSON.stringify(search_results));
-			display(search_results);
+			display(search_results, rand_creator);
 		} else {
 			alert('There was a problem with the request.'); 
 			console.log(httpRequest.responseText);
@@ -55,9 +59,13 @@ function search() {
 		httpRequest.send();
 }
 
-function display(results) {
+function display(results, creator) {
 	event.preventDefault();
 	var num_comics = results.data.results.length;
+	if (num_comics === 0) {
+		search();
+		return; 
+	}
 	var index = randomIntFromInterval(0, num_comics - 1);
 	console.log("Index is: " + index);
 	console.log("The selected title is:" + results.data.results[index].title);
@@ -85,10 +93,54 @@ function display(results) {
 	
 	var attribution_div = document.getElementById("attr-footer");
 	output = results.attributionHTML;
-	attribution_div.innerHTML = output; 
+	attribution_div.innerHTML = output;
+	if (creator !== undefined) {
+		searchCreators("http://gateway.marvel.com:80/v1/public/creators/" + creator + "?apikey=" + my_key)
+	}
 }
 
+function searchCreators(URL) {
+	event.preventDefault();
+	var search_results;
+	var rand_creator = randomIntFromInterval(0, 1499);
+	
+	//search by comic:creator, filter by comics only
+	if (URL === undefined) {
+		URL = "http://gateway.marvel.com:80/v1/public/creators/" + creator + "?apikey=" + my_key;
+	}
+	
+	var httpRequest = createHttpRequestObject(); 
+	httpRequest.onreadystatechange = function() {
+		if (httpRequest.readyState != 4) {
+			return; 
+		}
+		if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+			search_results  = JSON.parse(httpRequest.responseText);
+			console.log("The search results by creator are:");
+			console.log(JSON.stringify(search_results));
+			displayCreator(search_results);
+		} else {
+			alert('There was a problem with the request.'); 
+			console.log(httpRequest.responseText);
+		}
 
+	}
+		httpRequest.open("GET", URL, true);
+		httpRequest.send();
+}
+
+function displayCreator(results) {
+	console.log("The creator search results are:");
+	console.log(JSON.stringify(results));
+	var output = "<br>" + "<table>"
+		output += "<tr>" + "<td>" + "<img src=" + "\"" + results.data.results[0].thumbnail.path + "/portrait_xlarge" + "." 
+					+ results.data.results[0].thumbnail.extension +  "\"" + ">" + "</td>" + "</tr>";
+		output += "<th>" + results.data.results[0].fullName + "</th>";
+		output += "</table>";
+	var creator_div = document.getElementById("creator-data");
+	creator_div.innerHTML = output; 
+	
+}
 //return a random integer from min to max
 function randomIntFromInterval(min, max)
 {

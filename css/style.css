@@ -73,6 +73,18 @@ th: {
 	
 }
 
+#wrapper{
+    overflow:auto;
+	margin: -10px;
+}
+
+
+#comic-data {
+	float:left;
+	margin: 10px;	
+}
+
+
 /*footer styles*/
 
 .footer {
