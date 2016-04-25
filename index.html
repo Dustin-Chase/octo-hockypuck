@@ -9,21 +9,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
 
-    <title>Steranko-A-Day</title>
+    <title>Marvel Creators Spotlight</title>
 
 </head>
 
 <body>
-        <!-- Sidebar -->
-			<ul class="sidebar-nav">
-                <li class="sidebar-home">
-                    <a href="#">
-                        Home
-                    </a>
+		<header>
+		<img src="images/spotlight.png">
+		<h1>Marvel Creators Spotlight</h1>
+		</header>
+		<nav>
+			<ul>
+                <li>
+                    <a href="#">Home</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
+                    <a href="overview.html">Overview</a>
                 </li>
                 <li>
                     <a href="#">Links</a>
@@ -32,34 +36,28 @@
                     <a href="#">Contact</a>
                 </li>
             </ul>
+		</nav>
+        
+		<!-- Page Content -->         
+		<img id="loading" src="images/loading.gif">
+		<div id="wrapper">
+			<div id="comic-data">
+			</div>
+			<div id="creator-data">
+			</div>
+		</div>
+		<form id="search">
+				<button onclick="javascript:search();">New Comic</button>
+		</form>
+		
+		<footer>
+		<p id="attr-footer"></p>
+		<br>
+		</footer>
 
-        <!-- Page Content -->
-        <body onload="javascript:search();">
-                    <h1>Steranko-A-Day</h1>
-                    <p>This page will display a cool Steranko comic each day. Come back each day to get your Steranko fix!</p>
-						<div id="loading > 
-						<img src="images/loading.gif">
-						</div>
-						<div id="wrapper">
-							<div id="comic-data">
-							</div>
-							<div id="creator-data">
-							</div>
-						</div>
-						<form id="search">
-								<button onclick="javascript:search();">Get Random Comic</button>
-						</form>
-						<footer class="footer">
-						<p id="attr-footer"></p>
-						<br>
-						</footer>
-
-    </div>
   
 	<!-- Functions that interact with the API -->
 	<script src="js/ster_search.js"></script>
-	<!-- jquery functions (loading gif) -->
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js">
-	</body>
+</body>
 
 </html>

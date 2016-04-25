@@ -9,8 +9,8 @@ Description: Marvel API. Searches Marvel database for comics where Jim Steranko 
 						 Updates daily. 
 
 */
-
-var my_key = "secret_key";
+var my_key = "ccb6288e75d288d68ca50a4dbd86dc17";
+window.onload = search(); 
 /*Create a new HttpRequestObject
 @ param: none
 @ return: an HttpRequestObject on success, undefined variable on failure
@@ -19,8 +19,7 @@ var my_key = "secret_key";
 @              will be undefined. 
 */
 function createHttpRequestObject() {
-	var xmlHttp = new XMLHttpRequest || new ActiveXObject("Microsoft.XMLHTTP");
-	return xmlHttp;		 
+	return (new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP"));		 
 }
 
 
@@ -30,13 +29,14 @@ function createHttpRequestObject() {
 @ Description: Search for creator ID
 */
 function search(URL) {
-	event.preventDefault();
+	var loadingdiv = document.getElementById("loading");
+	loadingdiv.style.display = "block";
 	var search_results;
-	var rand_creator = randomIntFromInterval(0, 1499);
+	var rand_creator = randomIntFromInterval(0, 1499); 
 	
 	//search by comic:creator, filter by comics only
 	if (URL === undefined) {
-		URL = "http://gateway.marvel.com:80/v1/public/creators/" + rand_creator + "/comics?format=comic&formatType=comic&limit=100&apikey=" + my_key;
+		URL = "http://gateway.marvel.com:80/v1/public/creators/" + rand_creator + "/comics?format=comic&formatType=comic&limit=100&apikey=" + "ccb6288e75d288d68ca50a4dbd86dc17";
 	}
 	
 	var httpRequest = createHttpRequestObject(); 
@@ -50,7 +50,7 @@ function search(URL) {
 			console.log(JSON.stringify(search_results));
 			display(search_results, rand_creator);
 		} else {
-			alert('There was a problem with the request.'); 
+			//alert('There was a problem with the request.'); 
 			console.log(httpRequest.responseText);
 		}
 
@@ -97,6 +97,7 @@ function display(results, creator) {
 	if (creator !== undefined) {
 		searchCreators("http://gateway.marvel.com:80/v1/public/creators/" + creator + "?apikey=" + my_key)
 	}
+	
 }
 
 function searchCreators(URL) {
@@ -138,7 +139,9 @@ function displayCreator(results) {
 		output += "<th>" + results.data.results[0].fullName + "</th>";
 		output += "</table>";
 	var creator_div = document.getElementById("creator-data");
-	creator_div.innerHTML = output; 
+	creator_div.innerHTML = output;
+	var loadingdiv = document.getElementById("loading");
+	loadingdiv.style.display = "none";	
 	
 }
 //return a random integer from min to max
@@ -147,12 +150,3 @@ function randomIntFromInterval(min, max)
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 
-$('#loading')
-    .hide()  // Hide it initially
-    .ajaxStart(function() {
-        $(this).show();
-    })
-    .ajaxStop(function() {
-        $(this).hide();
-    })
-;
