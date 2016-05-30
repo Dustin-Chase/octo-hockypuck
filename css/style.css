@@ -31,6 +31,8 @@ nav a:hover {
 
 /*table styles*/
 table {
+	table-layout: fixed; 
+	width: 400px; 
 	margin:0px;padding:10px;
 	box-shadow: 10px 10px 5px #888888;
 	border:1px solid #4c1919;
@@ -51,29 +53,31 @@ table {
 	border-top-left-radius:19px;
 }
 
-tr:nth-child(even) {background: #CCC}
-tr:nth-child(odd) {background: #FFF}
-th: {
+td {
+	word-wrap:break-word;
+	text-align:center;
+}
+tr:nth-child(odd) {background: #CCC}
+tr:nth-child(even) {background: #FFF}
+
+th {
 	background: #FF0000;
 	font-weight: 900;
 }
 
-#steranko {
-	font-weight: 900;
-	
+.creator:hover {
+	font-weight: bold; 
 }
-
 #wrapper{
-    overflow:auto;
-	margin: -10px;
+    display: flex; 
+	overflow:auto;
+	margin-left: 10%;
 }
 
-
-#comic-data {
-	float:left;
-	margin: 10px;	
+#data {
+	width: 25%;
+	margin-right: 5%; 
 }
-
 
 /*footer styles*/
 
@@ -93,4 +97,45 @@ footer a {
 footer a:hover {
     text-decoration: underline;
     color: #fff;
+}
+
+/*List styles*/
+
+dl, dt, dd {
+  width: 93%; 
+  margin: 0; 
+}
+
+dt {
+  border-top: 1px solid #000; 
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  padding: 1em; 
+  font-weight: bold; 
+}
+
+a {
+	text-decoration: none; 
+	color: black; 
+}
+
+dd {
+  padding: 1em; 
+  margin-bottom: 1em; 
+  font-style: italic; 
+  word-wrap: break-word;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;  
+}
+
+table img {
+	margin-left: 20%; 
+}
+
+button {
+  	margin: 3%; 
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
 }

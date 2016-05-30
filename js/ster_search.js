@@ -10,36 +10,32 @@ Description: Marvel API. Searches Marvel database for comics where Jim Steranko 
 
 */
 var my_key = "ccb6288e75d288d68ca50a4dbd86dc17";
-window.onload = search(); 
-/*Create a new HttpRequestObject
-@ param: none
-@ return: an HttpRequestObject on success, undefined variable on failure
-@ Description: Tries to create an XMLHttp request for modern browsers. If failure, 
-@              tries to create an ActiveXObject (IE 5, 6). If neither succeeds, return
-@              will be undefined. 
-*/
-function createHttpRequestObject() {
-	return (new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP"));		 
+window.onload = init;  
+
+function init() {
+	document.getElementById("random-comic").setAttribute("onclick", "search();");
+	
+	var TWENTY_FOUR_HOURS = 60 * 60 * 24 * 1000; //24 hours in milliseconds
+	var comicsArray = localStorage["comicsArray"];
+	if (!comicsArray || ((new Date()) - comicsArray["retrievedOn"]) > TWENTY_FOUR_HOURS) {
+		comicsArray = getComics();
+		comicsArray["retrievedOn"] = new Date();
+		localStorage.setItem("comicsArray", comicsArray);
+	}
 }
 
 
-/*Create a new AJAX request and search for requested title
-@ param: none
-@ return: an HttpRequestObject on success, undefined variable on failure
-@ Description: Search for creator ID
-*/
-function search(URL) {
+function search() {
 	var loadingdiv = document.getElementById("loading");
 	loadingdiv.style.display = "block";
 	var search_results;
 	var rand_creator = randomIntFromInterval(0, 1499); 
 	
 	//search by comic:creator, filter by comics only
-	if (URL === undefined) {
-		URL = "http://gateway.marvel.com:80/v1/public/creators/" + rand_creator + "/comics?format=comic&formatType=comic&limit=100&apikey=" + "ccb6288e75d288d68ca50a4dbd86dc17";
-	}
-	
-	var httpRequest = createHttpRequestObject(); 
+	var URL = "http://gateway.marvel.com:80/v1/public/creators/" + rand_creator + "/comics?format=comic&formatType=comic&limit=100&apikey=" + "ccb6288e75d288d68ca50a4dbd86dc17";
+
+
+	var httpRequest = new XMLHttpRequest(); 
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState != 4) {
 			return; 
@@ -75,20 +71,14 @@ function display(results, creator) {
 	var data_div = document.getElementById("comic-data");
 	console.log(results.data.results[index].thumbnail.path + "/portrait_uncanny" + "." 
 					+ results.data.results[index].thumbnail.extension);
-	var output = "<table>"
+	var output = ""
 		output += "<tr>" + "<td>" + "<img src=" + "\"" + results.data.results[index].thumbnail.path + "/portrait_uncanny" + "." 
 					+ results.data.results[index].thumbnail.extension +  "\"" + ">" + "</td>" + "</tr>";
 		output += "<th>" + results.data.results[index].title + "</th>";
 		for (i in results.data.results[index].creators.items) {
-			if (results.data.results[index].creators.items[i].name.indexOf("Steranko" > -1)) {
-				output += "<tr id=\"steranko\">" + "<td>" + results.data.results[index].creators.items[i].name + " ";
-			}
-			else {
-				output += "<tr>" + "<td>" + results.data.results[index].creators.items[i].name + " ";
-			}
+			output += "<tr>" + "<td>" + results.data.results[index].creators.items[i].name + " ";
 			output += results.data.results[index].creators.items[i].role + "</td>" + "</tr>";
 		}			
-		output += "</table>"
 	data_div.innerHTML = output; 
 	
 	var attribution_div = document.getElementById("attr-footer");
@@ -110,7 +100,7 @@ function searchCreators(URL) {
 		URL = "http://gateway.marvel.com:80/v1/public/creators/" + creator + "?apikey=" + my_key;
 	}
 	
-	var httpRequest = createHttpRequestObject(); 
+	var httpRequest = new XMLHttpRequest(); 
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState != 4) {
 			return; 
@@ -145,8 +135,7 @@ function displayCreator(results) {
 	
 }
 //return a random integer from min to max
-function randomIntFromInterval(min, max)
-{
+function randomIntFromInterval(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
 }
 

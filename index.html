@@ -41,14 +41,22 @@
 		<!-- Page Content -->         
 		<img id="loading" src="images/loading.gif">
 		<div id="wrapper">
-			<div id="comic-data">
+			<div id="data">
+			<table id="comic-data">
+					<tbody>
+					<tr><td colspan="2" id="comic-title"></td></tr>
+					<tr><td><img id="comic-image"></td></tr>
+					<tr><td colspan="2" id="comic-description"></td></tr>
+					</tbody>
+				</table>
+			<button id="random-comic">New Comic</button>
 			</div>
-			<div id="creator-data">
+			<div id="other_data">
+				<dl id="search_results">
+				</dl>
 			</div>
 		</div>
-		<form id="search">
-				<button onclick="javascript:search();">New Comic</button>
-		</form>
+		
 		
 		<footer>
 		<p id="attr-footer"></p>
@@ -57,7 +65,10 @@
 
   
 	<!-- Functions that interact with the API -->
-	<script src="js/ster_search.js"></script>
+	<script src="js/script.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script> 
 </body>
 
 </html>
