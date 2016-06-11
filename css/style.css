@@ -107,9 +107,6 @@ dl, dt, dd {
 }
 
 dt {
-  border-top: 1px solid #000; 
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
   padding: 1em; 
   font-weight: bold; 
 }
@@ -124,9 +121,22 @@ dd {
   margin-bottom: 1em; 
   font-style: italic; 
   word-wrap: break-word;
-  border-bottom: 1px solid #000;
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;  
+}
+
+li {
+	margin: 1%; 
+	border: 1px solid black; 
+}
+
+ul {
+	list-style-type: none; 
+}
+.slide {
+  transition: all .2s ease-in-out; 
+}
+.slide:hover { 
+  transform: scale(1.1); 
+   background-color: aqua; 
 }
 
 table img {
